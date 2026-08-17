@@ -1,0 +1,43 @@
+# ── Dependencies
+node_modules/
+
+# ── Build / Cache
+.next/
+dist/
+build/
+coverage/
+.cache/
+.turbo/
+*.tsbuildinfo
+
+# ── Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# ── Env (예시는 커밋 허용)
+.env
+.env.*
+!.env.example
+
+# ── IDE / Editor
+.vscode/
+.idea/
+*.iml
+
+# ── OS
+.DS_Store
+Thumbs.db
+
+# ── Misc
+.history/
+node_repl_history
+.eslintcache
+*.swp
+*.swo
+*.bak
+
+# ── Legacy npm/yarn caches (있으면)
+.npm-cache/
+.yarn-cache/
