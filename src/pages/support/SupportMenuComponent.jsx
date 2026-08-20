@@ -24,13 +24,7 @@ const SupportMenuComponent = ({activeMenu}) => {
           <S.FAQButton isActive={activeMenu === 'faq'} >FAQ</S.FAQButton>
         </Link>
         <S.BetweenButton  >ㆍ</S.BetweenButton>
-<<<<<<< HEAD
-        <Link to="/support/inquiry-list">
-          <S.InquiryButton isActive={activeMenu === 'inquiry'}>1:1문의</S.InquiryButton>
-        </Link>
-=======
           <S.InquiryButton isActive={activeMenu === 'inquiry'} onClick={() => onClickLink("/support/inquiry-list")} >1:1문의</S.InquiryButton>
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
       </S.MenuWrapper>
   );
 };

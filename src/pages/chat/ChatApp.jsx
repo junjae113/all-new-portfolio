@@ -7,18 +7,11 @@ import Text from '../../components/text/size.js';
 import ScheduleModal from './ScheduleModal.jsx';
 import S from './style.js';
 
-<<<<<<< HEAD
-const ChatApp = ({ chat, onToggleScheduleAlert }) => {
-  // chat: ChatList에서 선택한 채팅방 객체
-  // onToggleScheduleAlert: ScheduleAlert on/off
-
-=======
 
 const ChatApp = ({ chat, onToggleScheduleAlert, freshKey, onBumpFreshKey }) => {
   
   const user_id = useSelector((state) => state.user.currentUser?.user_id);
   const [messages, setMessages] = useState([]);
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -36,13 +29,8 @@ const ChatApp = ({ chat, onToggleScheduleAlert, freshKey, onBumpFreshKey }) => {
 
   const activeChat = chat || {
     id: 0,
-<<<<<<< HEAD
-    name: '채팅방을 선택해주세요',
-    avatar: '/assets/img/chat/dogEmptyProfile.png',
-=======
     target_name: '채팅방을 선택해주세요',
     target_profile_img: '/assets/img/chat/dogEmptyProfile.png',
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
   };
 
   const roomId = String(
@@ -50,8 +38,6 @@ const ChatApp = ({ chat, onToggleScheduleAlert, freshKey, onBumpFreshKey }) => {
   );
   console.log("roomId", roomId);
 
-<<<<<<< HEAD
-=======
   if (!window.__chatSocket) {
     window.__chatSocket = io('http://localhost:8000', { withCredentials: true });
   }
@@ -64,7 +50,6 @@ const ChatApp = ({ chat, onToggleScheduleAlert, freshKey, onBumpFreshKey }) => {
     return (div.textContent || div.innerText || '').trim();
   };
 
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
   const handleAddSchedule = (newSchedule) => {
     console.log('새 일정 추가:', newSchedule);
     // 일정 추가되면 채팅방에도 일정이 떠야함 !!
@@ -282,18 +267,6 @@ const ChatApp = ({ chat, onToggleScheduleAlert, freshKey, onBumpFreshKey }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImage]);
 
-<<<<<<< HEAD
-  return (
-    <S.ChatApp>
-      <S.ChatAppHeader>
-        <S.ChatAppHeaderLeft>
-          <S.ChatAppAvatar src={activeChat.avatar} alt={activeChat.name} />
-          <Text.Body3 fontWeight="600" color="#000" style={{ margin: 0 }}>
-            {activeChat.name}
-          </Text.Body3>
-        </S.ChatAppHeaderLeft>
-
-=======
   // 채팅방 생성 호출 임시 api 
   // const handleClick = async () => {
   //   try {
@@ -330,7 +303,6 @@ const ChatApp = ({ chat, onToggleScheduleAlert, freshKey, onBumpFreshKey }) => {
           {/* <button onClick={handleClick}>채팅방 만들기</button> */}
         </S.ChatAppHeaderLeft>
 
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
         <S.ChatAppHeaderActions>
           <button onClick={onToggleScheduleAlert}>
             <FontAwesomeIcon icon={faEllipsisVertical} style={{ fontSize: '24px' }} />
@@ -339,41 +311,19 @@ const ChatApp = ({ chat, onToggleScheduleAlert, freshKey, onBumpFreshKey }) => {
       </S.ChatAppHeader>
 
       <S.ChatAppMessages>
-<<<<<<< HEAD
-        {messages.reduce((acc, msg, idx, arr) => {
-=======
         {(messages ?? []).reduce((acc, msg, idx, arr) => {
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
           const prevMsg = arr[idx - 1];
           const showDateDivider = !prevMsg || prevMsg.dateStr !== msg.dateStr;
 
           if (showDateDivider) {
             acc.push(
-<<<<<<< HEAD
-              <S.ChatAppDateDivider key={`date-${msg.date}`}>
-                {msg.date}
-=======
               <S.ChatAppDateDivider key={`date-${msg.createdAt}-${idx}`}>
                 {msg.dateStr}
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
               </S.ChatAppDateDivider>
             );
           }
 
           acc.push(
-<<<<<<< HEAD
-            <S.ChatAppMessage key={msg.id} isMe={msg.sender === 'me'}>
-              <S.ChatAppBubble isMe={msg.sender === 'me'}>
-                {msg.text && <S.ChatAppMessageText>{msg.text}</S.ChatAppMessageText>}
-                {msg.image && <S.ChatAppMessageImage src={msg.image} alt="message" />}
-              </S.ChatAppBubble>
-
-              <S.ChatAppMessageInfo>
-                <S.ChatAppTime>{msg.time}</S.ChatAppTime>
-                {msg.sender === 'me' && (
-                  <S.ChatAppReadStatus>{msg.read ? '읽음' : '전송됨'}</S.ChatAppReadStatus>
-                )}
-=======
             <S.ChatAppMessage key={msg._id} isMe={msg.sender_id === user_id}>
               <S.ChatAppBubble key={msg._id ?? idx} isMe={msg.sender_id === user_id}>
                 {msg.message && <S.ChatAppMessageText>{msg.message}</S.ChatAppMessageText>}
@@ -406,7 +356,6 @@ const ChatApp = ({ chat, onToggleScheduleAlert, freshKey, onBumpFreshKey }) => {
                 {msg.sender_id === user_id && (
                   <S.ChatAppReadStatus>{msg.read ? '읽음' : '전송됨'}</S.ChatAppReadStatus>
                 )}
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
               </S.ChatAppMessageInfo>
             </S.ChatAppMessage>
           );

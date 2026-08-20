@@ -8,11 +8,7 @@ import { faStarOfLife } from '@fortawesome/free-solid-svg-icons';
 import FileUpload from '../../components/fileUpload/FileUpload';
 import TextArea from '../../components/textArea/TextArea';
 import RadioWithLabel from '../../components/radio/RadioWithLabel';
-<<<<<<< HEAD
-import { Link } from 'react-router-dom';
-=======
 import { Link, useNavigate } from 'react-router-dom';
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
 
 const Inquiry = ({isUpdate, setIsUpdate}) => {
   
@@ -20,20 +16,12 @@ const Inquiry = ({isUpdate, setIsUpdate}) => {
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value)
-<<<<<<< HEAD
-    console.log(e.target.value)
-=======
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
   }
   
   const [content, setContent] = useState("")
 
   const onChangeContent = (e) => {
     setContent(e.target.value)
-<<<<<<< HEAD
-    console.log(e.target.value)
-=======
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
   }
   
   const [type, setType] = useState("")
@@ -42,17 +30,9 @@ const Inquiry = ({isUpdate, setIsUpdate}) => {
   
   const handleChange = (value) => {
     setSelected(value);
-<<<<<<< HEAD
-    console.log(value);
     
    const mapping = { a: 0, b: 1, c: 2, d: 3 };
     setType(mapping[value]);
-    console.log(mapping[value]);
-=======
-    
-   const mapping = { a: 0, b: 1, c: 2, d: 3 };
-    setType(mapping[value]);
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
   };
   
   const [file, setFile] = useState("")
@@ -60,23 +40,6 @@ const Inquiry = ({isUpdate, setIsUpdate}) => {
     setFile(e.target.value)
   }
 
-<<<<<<< HEAD
-  const onClickPost = async (e) => {
-
-      window.alert('저장되었습니다');
-      await fetch(`${process.env.REACT_APP_BACKEND_URL}/inquiry/api/post-inquiry`, {
-        method : "POST",
-        headers : {
-          "Content-Type" : "application/json"
-        },
-        body : JSON.stringify({
-          inquiry_id : Date.now().toString(36) + Math.random().toString(36).substring(2, 8),
-          user_id : "user_test",
-          type : type,
-          title : title,
-          content : content,
-          file : file
-=======
   const link = useNavigate("")
 
   const onClickPost = async (e) => {
@@ -105,7 +68,6 @@ const Inquiry = ({isUpdate, setIsUpdate}) => {
           title : title,
           content : content,
           file : file,
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
         })
       })
       .then((res) => {
@@ -122,10 +84,6 @@ const Inquiry = ({isUpdate, setIsUpdate}) => {
         setIsUpdate(!isUpdate)
       })
       .catch(console.error)
-<<<<<<< HEAD
-      
-      
-=======
       link("/support/inquiry-list");
     }}
 
@@ -137,7 +95,6 @@ const Inquiry = ({isUpdate, setIsUpdate}) => {
       } else {
         link("/support/inquiry-list")
       }
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
     }
 
 
@@ -155,59 +112,6 @@ const Inquiry = ({isUpdate, setIsUpdate}) => {
                 </div>
             </div>
             <S.InquiryBodyWrapper>
-<<<<<<< HEAD
-               {/* <S.InquiryNameWrapper>
-                   <S.InquiryCategory>
-                     이름&nbsp;
-                    <FontAwesomeIcon icon={faStarOfLife} style={{color: "#cf4b05", fontSize: "10px"}} />
-                   </S.InquiryCategory>
-                   <S.NameInput>
-                    <BasicInput placeholder="이름을 입력하세요" />
-                   </S.NameInput>
-               </S.InquiryNameWrapper>
-               <S.InquiryPhoneWrapper>
-                   <S.InquiryCategory>
-                    연락처&nbsp;
-                    <FontAwesomeIcon icon={faStarOfLife} style={{color: "#cf4b05", fontSize: "10px"}} />
-                   </S.InquiryCategory>
-                   <S.InputsWrapper>
-                    <S.SelectPhonStart>
-                        <SelectBox options={["010", "011", "016", "017", "018", "019"]}/>
-                    </S.SelectPhonStart>
-                    <S.PhoneInput>
-                        <BasicInput placeholder="" />
-                    </S.PhoneInput>
-                    <S.PhoneInput>
-                        <BasicInput placeholder="" />
-                    </S.PhoneInput>
-                   </S.InputsWrapper>
-               </S.InquiryPhoneWrapper>
-               <S.InquiryEmailWrapper>
-                   <S.InquiryCategory>이메일</S.InquiryCategory>
-                   <S.InputsWrapper>
-                    <BasicInput placeholder="이메일을 입력해주세요" />
-                    <S.Email>@</S.Email>
-                    <S.EmailSelectBox>
-                     <SelectBox options={[
-                        "naver.com", 
-                        "gmail.com", 
-                        "hanmail.net", 
-                        "hotmail.com", 
-                        "nate.com", 
-                        "yahoo.com", 
-                        "empas.com",
-                        "dreamwiz.com", 
-                        "freechal.com", 
-                        "lycos.co.kr", 
-                        "korea.com", 
-                        "hanmir.com", 
-                        "paran.com"
-                        ]} />
-                    </S.EmailSelectBox>
-                   </S.InputsWrapper>
-               </S.InquiryEmailWrapper> */}
-=======
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
                <S.InquiryQuestionCategoryWrapper>
                    <S.InquiryCategory>
                     문의유형&nbsp;
@@ -253,21 +157,11 @@ const Inquiry = ({isUpdate, setIsUpdate}) => {
                        </S.FileWrapper>
                </S.InquiryFileWrapper>
             </S.InquiryBodyWrapper>
-<<<<<<< HEAD
-             <Link to="/support/inquiry-list" >
-                <S.InquiryButtonWrapper>
-                    <BasicButton children={"취소"} variant={"gray"} basicButton={"medium"} />
-                    <BasicButton children={"저장"} variant={"default"} basicButton={"medium"} onClick={onClickPost} />
-                </S.InquiryButtonWrapper>
-             </Link>
-        </S.InquiryWrapper>
-=======
                 <S.InquiryButtonWrapper>
                     <BasicButton children={"취소"} variant={"gray"} basicButton={"medium"} onClick={onClickCancel}/>
                     <BasicButton children={"저장"} variant={"default"} basicButton={"medium"} onClick={onClickPost} />
                 </S.InquiryButtonWrapper>
       </S.InquiryWrapper>
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
     );
 };
 

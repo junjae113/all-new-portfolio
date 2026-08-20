@@ -11,10 +11,7 @@ import 'react-time-picker/dist/TimePicker.css';
 import BasicButton from "../../components/button/BasicButton";
 import S from './style';
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
 const ScheduleModal = ({ 
   onClose,
   onAddSchedule = () => {},
@@ -44,12 +41,6 @@ const ScheduleModal = ({
     }
   };
 
-<<<<<<< HEAD
-  // 추가하기, 일정추가 버튼 클릭 시
-  const handleAdd = () => {
-    if (step === 1 && selectedDate) {
-      // 추가하기 버튼 클릭시
-=======
 
 // console.log("selectedFriend._id" ,selectedFriend._id);
   // 친구 목록 불러오는 api
@@ -80,7 +71,6 @@ const ScheduleModal = ({
   const handleAdd = async() => {
     if (step === 1 && selectedDate) {
       // 추가하기 버튼 클릭시 
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
       setStep(2);
     } else if (step === 2) {
       // 일정추가 버튼 클릭 시
@@ -93,17 +83,6 @@ const ScheduleModal = ({
     const onlyDate = selectedDate ? format(selectedDate, "yyyy-MM-dd") : "";
     const onlyTime = startTime ? format(startTime, "HH:mm") : null;
 
-<<<<<<< HEAD
-      const newSchedule = {
-        title: title,
-        date: selectedDate.toISOString().split('T')[0],
-        startTime: startTime,
-        location: location,
-        friends: selectedFriends,
-      };
-
-      onAddSchedule(newSchedule);
-=======
     await fetch(`http://localhost:8000/calendar/api/post-schedules`, {
       method : "POST",
       headers : {
@@ -130,7 +109,6 @@ const ScheduleModal = ({
       })
       .catch(console.error)
       onAddSchedule();
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
       onClose();
     }
   };
@@ -212,24 +190,6 @@ const ScheduleModal = ({
                 </S.InputSpan>
               </S.InputGroup>
             </S.InputGroupContainer>
-<<<<<<< HEAD
-
-            <S.InputGroupContainer>
-              <FontAwesomeIcon icon={faClock} style={{ color: '#616161', marginRight: '15px', width: '24px', height: '24px' }} />
-              <S.InputGroup>
-                <TimePicker
-                  onChange={setStartTime}
-                  value={startTime}
-                  disableClock
-                  clearIcon={null}
-                  clockIcon={null}
-                  format="HH:mm"
-                />
-              </S.InputGroup>
-            </S.InputGroupContainer>
-
-            <S.InputGroupContainer>
-=======
 
             <S.InputGroupContainer>
               <FontAwesomeIcon icon={faClock} style={{ color: '#616161', marginRight: '15px', width: '24px', height: '24px' }} />
@@ -248,7 +208,6 @@ const ScheduleModal = ({
             </S.InputGroupContainer>
 
             <S.InputGroupContainer>
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
               <FontAwesomeIcon icon={faLocationDot} style={{ color: '#616161', marginRight: '15px', width: '24px', height: '24px' }} />
               <S.InputGroup>
                 <S.Input
@@ -263,17 +222,10 @@ const ScheduleModal = ({
             <S.FriendsSelect>
               {friends.map(friend => (
                 <S.FriendAvatar
-<<<<<<< HEAD
-                  key={friend.id}
-                  src={friend.avatar}
-                  alt={friend.name}
-                  className={selectedFriends.find(f => f.id === friend.id) ? 'selected' : ''}
-=======
                   key={friend._id}
                   src={friend.target_profile_img}
                   alt={friend.target_name}
                   className={selectedFriend?._id === friend._id ? 'selected' : ''}
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
                   onClick={() => toggleFriend(friend)}
                 />
               ))}

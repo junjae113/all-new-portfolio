@@ -1,37 +1,5 @@
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-<<<<<<< HEAD
-import S from './style.js';
-
-
-const ChatList = ({ chats, onSelectChat, selectedChat }) => {
-  // chats: prop로 chatting에서 전체 chat 객체 리스트 받음
-  // onSelectChat: ChatList에서 선택한 채팅방 Chatting에 알려주는 함수
-  // selectChat: ChatList에서 선택한 채팅방의 정보를 담고 있는 객체
-
-  return (
-    <S.ChatListContainer p={20} m={20}>
-      <S.TitleContainer>
-        <FontAwesomeIcon icon={faPaw} style={{ fontSize: '25px', marginLeft: '9px' }} />
-        <S.ChatTitle>매칭된 친구와 채팅을 시작해보세요 !</S.ChatTitle>
-      </S.TitleContainer>
-
-      <S.ChatList>
-        {chats.map((chat) => (
-          <S.ChatListItem
-            key={chat.id}
-            onClick={() => onSelectChat(chat)}
-            className={selectedChat?.id === chat.id ? 'selected' : ''}
-          >
-            <S.ChatAvatar src={chat.avatar} alt={chat.name} />
-            <S.ChatInfo>
-              <S.ChatName>{chat.name}</S.ChatName>
-              <S.ChatLast>{chat.lastComment}</S.ChatLast>
-            </S.ChatInfo>
-            <S.ChatRead>
-              <S.ChatLastTime>{chat.lastMessageAt}</S.ChatLastTime>
-              {chat.unreadCount > 0 && <S.UnreadBadge>{chat.unreadCount}</S.UnreadBadge>}
-=======
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import S from './style.js';
@@ -124,7 +92,6 @@ const ChatList = ({ onSelectChat, selectedChat, freshKey = 0 }) => {
             <S.ChatRead>
               <S.ChatLastTime>{formatLastMessageAt(chat.lastMessageAt)}</S.ChatLastTime>
               {chat.unreadCounts > 0 && <S.UnreadBadge>{chat.unreadCounts}</S.UnreadBadge>}
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
             </S.ChatRead>
           </S.ChatListItem>
         ))}

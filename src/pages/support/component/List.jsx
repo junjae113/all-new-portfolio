@@ -1,20 +1,7 @@
 import React, { useEffect, useState } from "react";
 import S from "./style";
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-
-// const data = Array.from({ length: 1234 }, (_, i) => ({
-//   id: i + 1,
-//   title: `멍픽 관련해서 문의 드립니다 ${i + 1}`,
-//   author: "홍 * 동",
-//   date: "2025.07.29",
-//   category: i % 2 === 0 ? "답변중" : "답변완료"
-// }));
-
-=======
 import { Link, useNavigate } from "react-router-dom";
 import RadioWithLabel from "../../../components/radio/RadioWithLabel";
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
 
 
 
@@ -31,18 +18,10 @@ const List = () => {
    .catch(error => console.error("문의글 불러오는 중 오류" + error))
  }, [])
 
-<<<<<<< HEAD
- console.log(data.length)
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
-  console.log(data.length)
-=======
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
 
   // 페이지 나누기
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
 
  const getPageNumbers = () => {
   if (totalPages <= 5) {
@@ -73,34 +52,6 @@ const List = () => {
   (currentPage - 1) * ITEMS_PER_PAGE,
   currentPage * ITEMS_PER_PAGE,
  )
-<<<<<<< HEAD
-// .map((item) => {
-//   item.created_at.split(10)
-//   console.log(item.created_at)
-//  })
-
-  return (
-    <div>
-      <S.ListWrapper>
-        <tbody>
-          {currentItems.map((item) => (
-            <S.Data key={item.id}>
-              <S.Author>{item.user_id}</S.Author>
-              <Link to={"/support/inquiry-detail"} >
-               <S.Title>{item.title}</S.Title>
-              </Link>
-              <S.Date>{item.created_at}</S.Date>
-              <S.Reply>{item.category}</S.Reply>
-            </S.Data>
-          ))}
-        </tbody>
-      </S.ListWrapper>
-
-      <S.PaginattionWrapper>
-       <button
-         disabled={currentPage === 1}
-         onClick={() => setCurrentPage(currentPage - 1)}
-=======
 
  const link = useNavigate("")
 
@@ -174,21 +125,12 @@ const List = () => {
         style={{
           display: isChecked ? "none" : "block" // 라디오 체크 시 숨김
         }}
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
        >
          &lt;
        </button>
 
        {getPageNumbers().map((page) => (
          <button
-<<<<<<< HEAD
-           key={page}
-           onClick={() => setCurrentPage(page)}
-           disabled={page === currentPage}
-           style={{
-            color: page === currentPage ? "#CF4B05" : "black"
-           }}
-=======
           className="pagination"
           key={page}
           onClick={() => setCurrentPage(page)}
@@ -197,21 +139,12 @@ const List = () => {
            color: page === currentPage ? "#CF4B05" : "black",
            display: isChecked ? "none" : "block"
           }}
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
          >
            {page}
          </button>
        ))}
 
        <button
-<<<<<<< HEAD
-         disabled={currentPage === totalPages}
-         onClick={() => setCurrentPage(currentPage + 1)}
-       >
-         &gt;
-       </button>
-     </S.PaginattionWrapper>
-=======
         className="pagination"
         disabled={currentPage === totalPages}
         onClick={() => setCurrentPage(currentPage + 1)}
@@ -222,7 +155,6 @@ const List = () => {
          &gt;
        </button>
      </S.PaginationWrapper>
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
     </div>
   );
 }

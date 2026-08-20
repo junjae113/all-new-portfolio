@@ -18,10 +18,6 @@ const CalendarMonth = ({ onDateClick, onEventClick, refreshKey = 0, initialDate 
   );
   
 
-<<<<<<< HEAD
-  // 월별 캘린더 날짜 클릭했을때
-  const handleDateClick = (info) => {
-=======
   useEffect(() => {
     let aborted = false; // 안전 장치(언마운트 중 setState 방지)
 
@@ -110,7 +106,6 @@ const CalendarMonth = ({ onDateClick, onEventClick, refreshKey = 0, initialDate 
 
   // 월별 캘린더 날짜 클릭했을때
   const handleDateClick = (info) => { 
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
     const clickedDate = info.dateStr;
     onDateClick(clickedDate);
   };

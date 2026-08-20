@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import S from './style';
-
-=======
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
@@ -9,7 +5,6 @@ import ComingSchedule from '../calendar/ComingSchedule';
 import CompletedSchedule from '../calendar/CompletedSchedule';
 import MiniCalendar from '../calendar/MiniCalendar';
 import ChatList from '../chat/ChatList';
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
 import Friends from './mypageComponent/friends/Friends';
 import ProfileCard from '../../components/profileCard/ProfileCard';
 import S from './style';
@@ -99,14 +94,6 @@ const MyPage = () => {
             </S.FirstWrapper>
             <S.SecondWrapper>
                 <S.CalendarWrapper>
-<<<<<<< HEAD
-                    <S.Calendar />
-                    <S.Plan />
-                    <S.Review />
-                </S.CalendarWrapper>
-                <S.Chat>
-                    채팅
-=======
                     <S.Calendar onClick={handleCalendarClick}>
                         <MiniCalendar />
                     </S.Calendar>
@@ -119,7 +106,6 @@ const MyPage = () => {
                 </S.CalendarWrapper>
                 <S.Chat >
                     <ChatList onSelectChat={handleChatClick}/>
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
                 </S.Chat>
             </S.SecondWrapper>
 

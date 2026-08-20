@@ -552,8 +552,6 @@ S.InputGroup = styled.div`
   align-items: center;
 `;
 
-<<<<<<< HEAD
-=======
 S.DateInput = styled.input`
   border: none;
   outline: none;
@@ -564,7 +562,6 @@ S.DateInput = styled.input`
 `;
 
 
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
 S.Input = styled.input`
   border: none;
   background: transparent;

@@ -1,82 +1,13 @@
 import { faCalendarDays, faClock, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-<<<<<<< HEAD
-import { useState } from 'react';
-=======
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useSelector } from 'react-redux';
 import BasicButton from "../../components/button/BasicButton";
 import './Calendar.css';
 import S from './style2';
-<<<<<<< HEAD
-
-const Schedule = ({ eventId, selectedDate, scheduleId }) => {
-  // const user_Id = useSelector(s => s.user.currentUser?.user_Id);
-  // const user_Id = '6895c4d407695ea93734389a'
-  const [user_Id, setUserId] = useState('6895c4d407695ea93734389a')
-  const [date, setDate] = useState(selectedDate); // props에서 받은날짜
-  const [schedule, setSchedule] = useState({}); // 일정객체를 통째로 등록
-  const [title, setTitle] = useState(''); // 일정 제목
-  const [startTime, setStartTime] = useState(null); // 일정시작시간
-  const [location, setLocation] = useState(''); // 일정 장소
-  // 친구 목록 -> 친구 id값을 가지고와서 프로필을 띄워야 함
-  const [friends, setFriends] = useState([
-    '/assets/img/chat/soul.png',
-    '/assets/img/chat/melody.png',
-    '/assets/img/chat/coco.png',
-    '/assets/img/chat/soul.png',
-    '/assets/img/chat/melody.png',
-    '/assets/img/chat/coco.png',
-  ]);
-
-  const [selectedFriends, setSelectedFriends] = useState([]); // 선택된 친구 -> id로 상태 저장
-  const [hoveredFriend, setHoveredFriend] = useState(null);
-
-  const [showError, setShowError] = useState(false);
-  // 백에서 온 메세지
-  const [value, setValue] = useState("")
-  const onChangeValue = (e) => {
-    setValue(e.target.value)
-  }
-
-  // ✅ 추가: 훅 사용
-  // const {
-  //   loading: mutating,
-  //   error: mutateError,
-  //   createScheduleSafe,
-  //   putSchedule,
-  //   deleteSchedule,
-  // } = useScheduleApi();
-
-  // useEffect(() => {
-  //   // eventId로 조회해서 setSchedule() 할 자리 (지금은 dummy)
-  //   setSchedule({});
-  // }, [eventId]);
-
-
-
-  const handleTitleChange = (e) => setTitle(e.target.value);
-  const handleLocationChange = (e) => setLocation(e.target.value);
-
-  // useEffect해서 일정 객체를 eventId로 가지고오거나, selectedDate로 가지고 오기
-  // useEFfect해서 api 일정 조회를 연동하기
-  // useEffect해서 친구목록을 api로 가지고 오고 setFriends로 연결
-
-  // useEffect(() => {
-  //   const dummy = {};
-  //   // const dummy = {
-  //   //   title: '한강 산책 모임',
-  //   //   date: '8월 3일 (토)',
-  //   //   startTime: '18:00',
-  //   //   location: '여의나루역 2번 출구 앞',
-  //   // };
-  //   setSchedule(dummy);
-  // }, [eventId]);
-=======
 
 
 const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
@@ -134,7 +65,6 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
         if (!response.ok) {
           throw new Error(`서버 응답 에러: ${response.status}`);
         }
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
 
         const data = await response.json();
         const friends = data.chats;
@@ -180,71 +110,6 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
     }
   }
 
-<<<<<<< HEAD
-  // 저장버튼 - api 일정 등록
-  const handleSave = async () => {
-    if (!title.trim()) {
-      setShowError(true);
-      return;
-    }
-    setShowError(false);
-    await fetch(`http://localhost:8000/calendar/api/post-schedules`, {
-      method : "POST",
-      headers : {
-        "Content-Type" : "application/json"
-      },
-      body : JSON.stringify({
-        title : title,
-        date: date,
-        time: startTime,
-        location: location,
-        // user_id: user_Id,
-        // chat_id: selectedFriends,
-      })
-    })
-    .then((res) => {
-      if(!res.ok) throw new Error(`Response Fetching Error`);
-      return res.json()
-    })
-    .then((res) => {
-        console.log(res)
-        if(res.message) alert(res.message);
-        // setValue("")
-        // setIsUpdate(!isUpdate) // 상태 리랜더링
-      })
-      .catch(console.error)
-  };
-  
-  // 수정버튼 - api 일정 수정 
-  const handleEdit = async () => {
-    try {
-      const res = await fetch('http://localhost:8000/calendar/api/put-schedules', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user_id: user_Id,
-          schedule_id: scheduleId,
-          schedule: {
-            title,
-            date: date ? date.toISOString() : null,
-            time: startTime ? startTime.toISOString() : null,
-            place: location,
-          },
-        }),
-      });
-
-      if (!res.ok) throw new Error("Response Fetching Error");
-      const result = await res.json();
-      console.log("updated:", result);
-      alert(result.message ?? "일정이 수정되었습니다.");
-      // TODO: refetch()
-    } catch (e) {
-      console.error(e);
-      alert("수정 실패");
-    }
-=======
   const hhmmToDate = (hhmm) => {
     if (!hhmm) return null;
     if (hhmm instanceof Date) return hhmm;
@@ -359,7 +224,6 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
       console.error(e);
       alert("삭제 실패");
     }
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
   };
 
 
@@ -379,13 +243,8 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
 
   return (
     <S.ScheduleCard>
-<<<<<<< HEAD
-      {schedule.title ? (
-        <S.ScheduleTitle1>{schedule.title}</S.ScheduleTitle1>
-=======
       {hasExisting && !isEditing ? (
         <S.ScheduleTitle1>{schedule?.title}</S.ScheduleTitle1>
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
       ) : (
         <S.ScheduleTitleInput
           type="text"
@@ -398,17 +257,6 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
       <S.InputGroupContainer>
         <FontAwesomeIcon icon={faCalendarDays} style={{ size: '20px', marginRight: '15px', color: '#616161' }} />
         <S.InputGroup>
-<<<<<<< HEAD
-          <span>{schedule.date || formattedSelectedDate}</span>
-        </S.InputGroup>
-      </S.InputGroupContainer>
-
-      {schedule.startTime ? (
-        <S.InputGroupContainer>
-          <FontAwesomeIcon icon={faClock} style={{ size: '20px', marginRight: '15px', color: '#616161' }} />
-          <S.InputGroup>
-            {schedule.startTime}
-=======
           <span>{schedule?.date ?? formattedSelectedDate}</span>
         </S.InputGroup>
       </S.InputGroupContainer>
@@ -418,7 +266,6 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
           <FontAwesomeIcon icon={faClock} style={{ size: '20px', marginRight: '15px', color: '#616161' }} />
           <S.InputGroup>
             {schedule.time}
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
           </S.InputGroup>
         </S.InputGroupContainer>
       ) : (
@@ -442,11 +289,7 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
       <S.InputGroupContainer>
         <FontAwesomeIcon icon={faLocationDot} style={{ size: '20px', marginRight: '15px', color: '#616161' }} />
         <S.InputGroup>
-<<<<<<< HEAD
-          {schedule.location ? (
-=======
           {(schedule?.location && !isEditing) ? (
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
             <span>{schedule.location}</span>
           ) : (
             <S.LocationInput
@@ -460,38 +303,6 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
       </S.InputGroupContainer>
 
       {/* 친구 목록 */}
-<<<<<<< HEAD
-      <S.FriendsSelect $maxWidth={(80 + 10) * 5}>
-        {(schedule.friends && schedule.friends.length > 0 ? schedule.friends : friends).map((f, idx) => (
-          <S.FriendAvatar
-            key={idx}
-            src={f}
-            alt="friend"
-            onClick={() => handleSelectFriend(f)}
-            onMouseEnter={() => setHoveredFriend(f)}
-            onMouseLeave={() => setHoveredFriend(null)}
-            $isSelected={selectedFriends.includes(f)}
-            $isHovered={hoveredFriend === f}
-          />
-        ))}
-      </S.FriendsSelect>
-
-      <S.ScheduleButtons>
-        {schedule.title ? (
-          <>
-            <BasicButton roundButton="small" variant="default" style={{ width: '100%' }}
-                          onClick={handleEdit}>
-              수정하기
-            </BasicButton>
-            <BasicButton roundButton="small" variant="filled" style={{ width: '100%' }}
-                          onClick={handleDelete}>
-              삭제하기
-            </BasicButton>
-          </>
-        ) : (
-          <BasicButton roundButton="small" variant="filled" style={{ width: '100%' }}
-                        onClick={handleSave}>
-=======
       <S.FriendsSelect 
       $maxWidth={(80 + 10) * 5}
       >
@@ -536,7 +347,6 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
         ) : (
           // 신규 일정
           <BasicButton roundButton="small" variant="filled" style={{ width: '100%' }} onClick={handleSave}>
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
             저장하기
           </BasicButton>
         )}

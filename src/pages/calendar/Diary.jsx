@@ -5,10 +5,6 @@ import { useSelector } from 'react-redux';
 import BasicButton from "../../components/button/BasicButton";
 import './Calendar.css';
 import S from './style2';
-<<<<<<< HEAD
-
-const Diary = ({ eventId, scheduleDiary }) => {
-=======
 
 
 const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
@@ -35,31 +31,12 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
 
   const hasDiary = !!(diaryText || diaryPhoto);
 
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
   const [text, setText] = useState('');
   const [file, setFile] = useState(null);   // 업로드 원본 파일
   const [previewUrl, setPreviewUrl] = useState(null); // 미리보기 url
 
-<<<<<<< HEAD
-  // ✅ 예시: 기존에 저장된 데이터 (빈 객체 or 데이터 있는 객체)
-  // const scheduleDiary = {}; 
-  // const scheduleDiary = { text: 
-  //   "오늘은 산책을 다녀왔어요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+
-  //   "오늘은 산책을 다녀왔어요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+
-  //   "오늘은 산책을 다녀왔어요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+
-  //   "오늘은 산책을 다녀왔어요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+
-  //   "오늘은 산책을 다녀왔어요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+
-  //   "오늘은 산책을 다녀왔어요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+
-  //   "오늘은 산책을 다녀왔어요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+
-  //   "오늘은 산책을 다녀왔어요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+
-  //   "오늘은 산책을 다녀왔어요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+
-  //   "오늘은 산책을 다녀왔어요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"+
-  //   "오늘은 산책을 다녀왔어요!ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
-  //   , imageUrl: "/assets/img/chat/soul.png" };
-=======
   // 보기/수정 모드 토글
   const [isEditing, setIsEditing] = useState(false);
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
 
   // 수정 모드에서 사용할 임시 입력값
   const [draftText, setDraftText] = useState('');
@@ -199,8 +176,6 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
     }
   };
 
-<<<<<<< HEAD
-=======
   // 편집 저장
   const handleUpdate = async () => {
     let nextPhotoUrl = diaryPhoto;
@@ -277,7 +252,6 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
     }
   };
 
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
   // 메모리 누수 방지
   useEffect(() => {
     return () => {
@@ -291,18 +265,11 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
     <S.DiaryCard>
       {!hasDiary && <S.DiaryTitle>일정에 대한 일기를 써보세요!</S.DiaryTitle>}
 
-<<<<<<< HEAD
-      {hasDiary ? (
-        scheduleDiary.imageUrl && (
-          <S.ImageWrapper>
-            <S.SavedImage src={scheduleDiary.imageUrl} alt="saved" />
-=======
       {/* 이미지 영역 */}
       {hasDiary && !isEditing ? (
         diaryPhoto && (
           <S.ImageWrapper>
             <S.SavedImage src={diaryPhoto} alt="saved" />
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
           </S.ImageWrapper>
         )
       ) : isEditing ? (
@@ -340,16 +307,10 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
           />
         </>
       ) : (
-<<<<<<< HEAD
-        image && (
-          <S.ImageWrapper>
-            <S.PreviewImage src={URL.createObjectURL(image)} alt="preview" />
-=======
         // 새 작성 모드: 새 미리보기
         previewUrl && (
           <S.ImageWrapper>
             <S.PreviewImage src={previewUrl} alt="preview" />
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
             <S.DeleteImageButton onClick={handleDeleteImage}>
               <FontAwesomeIcon icon={faTimesCircle} style={{ color: 'white', fontSize: '20px' }} />
             </S.DeleteImageButton>
@@ -357,10 +318,6 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
         )
       )}
 
-<<<<<<< HEAD
-      {hasDiary ? (
-        <S.TextField>{scheduleDiary.text}</S.TextField>
-=======
       {/* 텍스트 영역 */}
       {hasDiary && !isEditing ? (
         <S.TextField>{diaryText}</S.TextField>
@@ -370,7 +327,6 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
           onChange={(e) => setDraftText(e.target.value)}
           placeholder="내용을 수정하세요..."
         />
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
       ) : (
         <S.Textarea
           value={text}
@@ -379,14 +335,9 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
         />
       )}
 
-<<<<<<< HEAD
-      <S.DiaryButtons>
-        {!hasDiary && (
-=======
       {/* 버튼들 */}
       <S.DiaryButtons>
         {!hasDiary && !isEditing && (
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
           <>
             <S.ImageUploadLabel htmlFor="image-upload">
               <FontAwesomeIcon icon={faImage} />
@@ -404,28 +355,15 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
           </>
         )}
 
-<<<<<<< HEAD
-        {hasDiary ? (
-          <>
-            <BasicButton roundButton="small" variant="default" onClick={handleEdit} style={{ width: '100%', margin: '10px' }}>
-=======
         {hasDiary && !isEditing && (
           <>
             <BasicButton roundButton="small" variant="default" onClick={handleStartEdit} style={{ width: '100%', margin: '10px' }}>
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
               수정하기
             </BasicButton>
             <BasicButton roundButton="small" variant="filled" onClick={handleDelete} style={{ width: '100%', margin: '10px' }}>
               삭제하기
             </BasicButton>
           </>
-<<<<<<< HEAD
-        ) : (
-          <BasicButton roundButton="small" variant="filled" onClick={handleSave} style={{ width: '100%', margin: '0 10px' }}>
-            저장하기
-          </BasicButton>
-        )}
-=======
         )}
 
         {hasDiary && isEditing && (
@@ -438,7 +376,6 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
             </BasicButton>
           </>
         )}
->>>>>>> 7ce7cfeeea3d97adf04799e68203868b9cb0b807
       </S.DiaryButtons>
     </S.DiaryCard>
 
