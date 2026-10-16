@@ -22,6 +22,7 @@ import Main from "../pages/main/Main";
 import Matching from "../pages/matching/Matching";
 import InquiryList from "../pages/support/InquiryList";
 import InquiryDetail from "../pages/support/InquiryDetail";
+import Explore from "../pages/explore/Explore";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "main", element: <Main /> },
+      { path: "explore", element: <Explore /> },
       { path: "sign-in", element: <SignIn /> },
       {
         path: "sign-up",

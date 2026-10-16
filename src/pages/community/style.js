@@ -11,7 +11,7 @@ S.Background = styled.div`
   /* background-color: ${({theme}) => theme.PALLETE.primary["light"]}; */
   display: flex;
   justify-content: center;
-  background-color: #FFF5EC;
+  background-color: #fff5ec;
   margin-top: 40px;
 `
 
@@ -242,8 +242,8 @@ S.TextBoxWrapper = styled.div`
   position: relative;
   margin-top: 24px;
   border-radius: 20px;
-  border-style: none;
-  background-color: ${({theme}) => theme.PALLETE.primary["main"]};
+  background-color: #FFFFFF;
+  border: 2px solid #CF4B05;
   width: 952px;
   height: 268px;
   display: flex;
@@ -497,12 +497,12 @@ S.TBBWrapper = styled.div`
 
 
 S.TextResultWrapper= styled.div`
+  max-width: 952px;
   margin-bottom: 50px;
   margin-top: 24px;
   border-radius: 20px;
-  border-style: solid;
-  border-color: gray;
-  background-color: white;
+  background-color: #FFFFFF;
+  border: 2px solid #CF4B05;
   padding: 49px 43px;
   box-shadow: 2px 2px 7px #A0A0A0;
   img {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser, setUserStatus } from '../modules/user';
+import { jwtDecode } from 'jwt-decode';
 
 const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
@@ -14,6 +15,24 @@ const AuthProvider = ({ children }) => {
   // 토큰 유효성 검사
   useEffect(() => {
     console.log('=== AuthProvider useEffect 실행 ===');
+
+    // 소셜 로그인(기존 회원)은 백엔드가 /main?accessToken=... 으로 돌려보냄
+    // → 주소창의 토큰을 localStorage에 저장하고, 주소창에서는 토큰을 지움
+    const params = new URLSearchParams(window.location.search);
+    const socialToken = params.get('accessToken');
+    if (socialToken && !isSignUpPage) {
+      localStorage.setItem('jwt_token', socialToken);
+      try {
+        const payload = jwtDecode(socialToken);
+        if (payload?.user_id) localStorage.setItem('user_id', payload.user_id);
+      } catch (e) {
+        console.error('소셜 로그인 토큰 해석 실패', e);
+      }
+      params.delete('accessToken');
+      const query = params.toString();
+      window.history.replaceState(null, '', window.location.pathname + (query ? `?${query}` : ''));
+    }
+
     const token = localStorage.getItem('jwt_token');
     const userName = localStorage.getItem('userName');
     const user_id = localStorage.getItem('user_id');

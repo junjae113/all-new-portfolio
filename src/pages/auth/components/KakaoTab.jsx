@@ -3,7 +3,7 @@ import S from "../style";
 
 const KakaoTab = () => {
   return (
-    <a href='http://localhost:8000/auth/kakao' style={{ textDecoration: 'none' , width: '100%'}}>
+    <a href={`${process.env.REACT_APP_BACKEND_URL}/auth/kakao`} style={{ textDecoration: 'none' , width: '100%'}}>
       <S.SocialLoginTabWrapper color="kakao">
         <S.KakaoIcon>
             <img src="/assets/img/kakao-L.png" alt="kakao"/>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import BasicButton from '../../components/button/BasicButton';
 import {
   faHeart, faSadTear, faHome, faDog, faUserSecret,
@@ -14,7 +14,9 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import S from './resultStyle';
 import MiniFooter from '../../components/layout/footer/MiniFooter';
-import { getResult } from '../../api/dbti';
+import { results } from './dbtiResultData';
+import useAuth from '../../components/auth/useAuth';
+import { setUser } from '../../components/modules/user';
 
 export default function DbtiResultPage() {
   const navigate = useNavigate();
@@ -26,7 +28,9 @@ export default function DbtiResultPage() {
   const [isSaving, setIsSaving] = useState(false);
   
   // Redux에서 현재 사용자 정보 가져오기
-  const currentUser = useSelector(state => state.user.user);
+  const currentUser = useSelector(state => state.user.currentUser);
+  const { userId } = useAuth();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (window.Kakao) return;
@@ -37,17 +41,10 @@ export default function DbtiResultPage() {
     document.head.appendChild(s);
   }, []);
 
+  // 결과 데이터는 dbtiResultData.js에 있으니 code로 바로 찾아요
   useEffect(() => {
-    (async () => {
-      try {
-        const data = await getResult(code);
-        setResult(data);
-      } catch {
-        setErr('결과를 불러오지 못했어요.');
-      } finally {
-        setLoading(false);
-      }
-    })();
+    setResult(results[code] ?? null);
+    setLoading(false);
   }, [code]);
 
   if (loading) return <div>불러오는 중...</div>;
@@ -73,13 +70,6 @@ export default function DbtiResultPage() {
     });
   };
 
-  const handleShareNaver = () => {
-    const url = encodeURIComponent(currentUrl);
-    const title = encodeURIComponent(`${result.title} - ${code}`);
-    const naverUrl = `https://share.naver.com/web/shareView?url=${url}&title=${title}`;
-    window.open(naverUrl, '_blank', 'noopener,noreferrer');
-  };
-
   const handleCopyLink = async () => {
     try { await navigator.clipboard.writeText(currentUrl); alert('링크가 복사되었습니다!'); }
     catch { alert('복사 실패'); }
@@ -87,11 +77,10 @@ export default function DbtiResultPage() {
 
   // MBTI 결과를 데이터베이스에 저장하는 함수
   const handleSaveMbtiResult = async () => {
-    // localStorage에서 직접 사용자 정보 가져오기
-    const userId = localStorage.getItem('user_id');
-
+    // userId는 useAuth()에서 가져와요 (Redux → JWT 토큰 → localStorage 순서)
     if (!userId) {
-      alert('사용자 정보가 없습니다.');
+      alert('로그인 후 결과를 저장할 수 있어요.');
+      navigate('/sign-in');
       return;
     }
 
@@ -118,6 +107,14 @@ export default function DbtiResultPage() {
 
       const result = await response.json();
       console.log('MBTI 결과 저장 성공:', result);
+
+      // Redux의 사용자 정보도 바로 갱신해서 프로필 카드에 새 결과가 보이게 해요
+      if (currentUser) {
+        dispatch(setUser({
+          ...currentUser,
+          dogMbti: { ...currentUser.dogMbti, isCompleted: true, result: code },
+        }));
+      }
       alert('MBTI 검사 결과가 저장되었습니다!');
 
     } catch (error) {
@@ -144,7 +141,11 @@ export default function DbtiResultPage() {
             <S.Features>
               {result.features.map((f, i) => (
                 <div className="feature" key={i}>
-                  <FontAwesomeIcon icon={faIconMapper[f.icon]} size="2x" />
+                  {pngIcons.has(f.icon) ? (
+                    <img src={`/assets/icons/free-icon-${f.icon}.png`} alt="" width={32} height={32} />
+                  ) : (
+                    <FontAwesomeIcon icon={faIconMapper[f.icon]} size="2x" />
+                  )}
                   <div>{f.label}</div>
                 </div>
               ))}
@@ -158,9 +159,6 @@ export default function DbtiResultPage() {
                 <div className="share-icons">
                   <button className="share-btn" onClick={handleShareKakao}>
                     <img src="/assets/img/kakao.png" alt="카카오톡 공유" />
-                  </button>
-                  <button className="share-btn" onClick={handleShareNaver}>
-                    <img src="/assets/img/naver.png" alt="네이버 공유" />
                   </button>
                   <button className="share-btn" onClick={handleCopyLink}>링크복사</button>
                 </div>
@@ -187,6 +185,13 @@ export default function DbtiResultPage() {
     </>
   );
 }
+
+// public/assets/icons/free-icon-*.png 로 있는 아이콘 (dbtiResultData.js의 icon 이름)
+const pngIcons = new Set([
+  'bark', 'caring', 'cool', 'dog', 'doghouse', 'dogtail', 'eyes', 'freedom', 'heart',
+  'jealous', 'king', 'latvia', 'laughing', 'nervous', 'observation', 'pawprints',
+  'sensor', 'social-distancing', 'thinking',
+]);
 
 const faIconMapper = {
   heart: faHeart, 'sad-tear': faSadTear, home: faHome, dog: faDog, 'user-secret': faUserSecret,

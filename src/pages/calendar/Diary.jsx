@@ -120,7 +120,7 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
     const formData = new FormData();
     formData.append('diary', fileToUpload); // 서버 필드명에 맞추기
 
-    const res = await fetch(`http://localhost:8000/calendar/api/post-diaryPictures`, {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/calendar/api/post-diaryPictures`, {
       method: 'POST',
       body: formData,
     });
@@ -143,7 +143,7 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
         diary_photo_url = await uploadDiaryImage(file);
       }
     
-    const res = await fetch(`http://localhost:8000/calendar/api/post-diary`, {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/calendar/api/post-diary`, {
       method : "POST",
       headers : {
         "Content-Type" : "application/json"
@@ -186,7 +186,7 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
       }
 
     try {
-      const res = await fetch(`http://localhost:8000/calendar/api/put-diary`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/calendar/api/put-diary`, {
         method : "PUT",
         headers : {
           "Content-Type" : "application/json"
@@ -221,7 +221,7 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
   // 일기 삭제
   const handleDelete = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/calendar/api/delete-diary`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/calendar/api/delete-diary`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

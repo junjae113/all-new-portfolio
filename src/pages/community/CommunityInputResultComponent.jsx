@@ -28,7 +28,8 @@ const CommunityInputResultComponent = ({
   // 로그인 사용자 (낙관적 UI용)
   const currentUser = useSelector(state => state.user.currentUser);
   const myDogName = currentUser?.dogProfile?.name ;
-  const myDogImg = currentUser?.dogProfile?.profileImage || '/assets/img/sample-profile.png';
+  const myId = currentUser?.user_id; // 내가 쓴 글/댓글에만 삭제 버튼을 보여주기 위해 사용
+  const myDogImg = currentUser?.dogProfile?.profileImage || '/assets/img/my-profile.png';
 
   // 시간 표시
   const getTime = (time) => {
@@ -53,8 +54,8 @@ const CommunityInputResultComponent = ({
   const [showConfirm, setShowConfirm] = useState(() => () => {});
 
   // 댓글 수 (대댓글 포함)
-  const getTotalCommentCount = (commentList) => {
-    if (!Array.isArray(commentList)) return 0;
+  const getTotalCommentCount = (commentList, fallback = 0) => {
+    if (!Array.isArray(commentList) || commentList.length === 0) return fallback;
     let count = 0;
     commentList.forEach((c) => {
       count += 1;
@@ -120,6 +121,7 @@ const CommunityInputResultComponent = ({
       createdAt: new Date().toISOString(),
       replies: [],
       // 낙관적 UI용 작성자 표시
+      authorId: myId,
       authorName: myDogName,
       authorProfileImage: myDogImg
     };
@@ -246,7 +248,8 @@ const CommunityInputResultComponent = ({
         return (
           <S.TextResultWrapper key={postItem.id}>
             <S.TRProfileWrapper>
-              <img src={postItem.authorProfileImage} alt="profile" />
+              {/* <img src={postItem.authorProfileImage} alt="profile" /> */}
+              <img src='/assets/img/my-profile.png' />
               <div>
                 <S.ProfileNameWrapper>
                   <S.ProfileName>{postItem.authorName}</S.ProfileName>
@@ -279,7 +282,7 @@ const CommunityInputResultComponent = ({
                       <img src="/assets/icons/chat.svg" alt="댓글" />
                     </S.CommentButton>
                     <S.HeartCommentCount>
-                      {getTotalCommentCount(postItem.commentList)}
+                      {getTotalCommentCount(postItem.commentList, postItem.commentCount)}
                     </S.HeartCommentCount>
                   </S.HeartCommentTop>
                 )}
@@ -320,19 +323,21 @@ const CommunityInputResultComponent = ({
                       <img src="/assets/icons/chat.svg" width={24} height={24} alt="댓글" />
                     </S.CommentButton>
                     <S.HeartCommentCount>
-                      {getTotalCommentCount(postItem.commentList)}
+                      {getTotalCommentCount(postItem.commentList, postItem.commentCount)}
                     </S.HeartCommentCount>
                   </S.HeartComment>
 
-                  <S.DeleteButton
-                    className="DeleteText"
-                    onClick={() => {
-                      setIsLargeOpenText(true);
-                      setShowConfirm(() => () => onRemovePost(postItem.id));
-                    }}
-                  >
-                    삭제하기
-                  </S.DeleteButton>
+                  {postItem.authorId === myId && (
+                    <S.DeleteButton
+                      className="DeleteText"
+                      onClick={() => {
+                        setIsLargeOpenText(true);
+                        setShowConfirm(() => () => onRemovePost(postItem.id));
+                      }}
+                    >
+                      삭제하기
+                    </S.DeleteButton>
+                  )}
                 </S.HeartLine>
 
                 <S.Line />
@@ -358,14 +363,16 @@ const CommunityInputResultComponent = ({
                           <S.PlusComment onClick={() => toggleReplyInput(comment.id)}>
                             댓글 남기기
                           </S.PlusComment>
-                          <S.DeleteCommentButton
-                            onClick={() => {
-                              setIsLargeOpenComment(true);
-                              setShowConfirm(() => () => onRemoveReply(postItem.id, comment.id));
-                            }}
-                          >
-                            삭제하기
-                          </S.DeleteCommentButton>
+                          {comment.authorId === myId && (
+                            <S.DeleteCommentButton
+                              onClick={() => {
+                                setIsLargeOpenComment(true);
+                                setShowConfirm(() => () => onRemoveReply(postItem.id, comment.id));
+                              }}
+                            >
+                              삭제하기
+                            </S.DeleteCommentButton>
+                          )}
                         </S.CommentLine>
 
                         <S.Line />
@@ -394,17 +401,19 @@ const CommunityInputResultComponent = ({
 
                               <S.PCRBottom>
                                 <S.Reply>{reply.text}</S.Reply>
-                                <S.DeleteCommentButton
-                                  className="ReplyDelete"
-                                  onClick={() => {
-                                    setIsLargeOpenComment(true);
-                                    setShowConfirm(
-                                      () => () => deleteReply(postItem.id, comment.id, reply.id)
-                                    );
-                                  }}
-                                >
-                                  삭제하기
-                                </S.DeleteCommentButton>
+                                {reply.authorId === myId && (
+                                  <S.DeleteCommentButton
+                                    className="ReplyDelete"
+                                    onClick={() => {
+                                      setIsLargeOpenComment(true);
+                                      setShowConfirm(
+                                        () => () => deleteReply(postItem.id, comment.id, reply.id)
+                                      );
+                                    }}
+                                  >
+                                    삭제하기
+                                  </S.DeleteCommentButton>
+                                )}
                               </S.PCRBottom>
 
                               <S.Line />

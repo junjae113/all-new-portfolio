@@ -6,7 +6,8 @@ const S = {}
   display: flex;
   align-items: center;
   font-size: ${({ theme }) => theme.FONT_SIZE["body1"]};
-  height: 76px;
+  height: px;
+  margin: 0 0 40px 0;
  `
 
  S.FriendsList = styled.div`
@@ -14,7 +15,7 @@ const S = {}
   align-items: center;
   gap: 34px;
   width: 825px;
-  height: 494px;
+  height: 500px;
   overflow-x: auto;
   overflow-y: hidden;
   flex-wrap: nowrap;
@@ -25,9 +26,9 @@ const S = {}
  `
 
  S.FriendCard = styled.div`
-  width: 278px;
-  height: 434px;
-  border-radius: 24px;
+  width: 300px;
+  height: 100%;
+  border-radius: 40px;
   background-color: gray;
   flex: 0 0 auto; /* 중요: 크기 고정 */
  `

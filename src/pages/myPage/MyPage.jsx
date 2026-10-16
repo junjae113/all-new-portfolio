@@ -88,27 +88,7 @@ const MyPage = () => {
                         <div>프로필 정보를 불러올 수 없습니다.</div>
                     )}
                 </div>
-                <S.Friends>
-                    <Friends/>
-                </S.Friends>
             </S.FirstWrapper>
-            <S.SecondWrapper>
-                <S.CalendarWrapper>
-                    <S.Calendar onClick={handleCalendarClick}>
-                        <MiniCalendar />
-                    </S.Calendar>
-                    <S.Plan onClick={handleCalendarClick}>
-                        <ComingSchedule />
-                    </S.Plan>
-                    <S.Review onClick={handleCalendarClick}>
-                        <CompletedSchedule />
-                    </S.Review>
-                </S.CalendarWrapper>
-                <S.Chat >
-                    <ChatList onSelectChat={handleChatClick}/>
-                </S.Chat>
-            </S.SecondWrapper>
-
         </S.Wrapper>
     );
 };

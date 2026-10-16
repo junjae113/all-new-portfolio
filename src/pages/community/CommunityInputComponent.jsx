@@ -14,7 +14,7 @@ const CommunityInputComponent = ({post, setPost}) => {
   const [showConfirm, setShowConfirm] = useState(false)
 
   const currentUser = useSelector(state => state.user.currentUser);
-  const profileSrc = currentUser?.dogProfile?.profileImage || '/assets/img/sample-profile.png';
+  const profileSrc = currentUser?.dogProfile?.profileImage || '/assets/img/my-profile.png';
 
 
   const handleConfirm = async () => {

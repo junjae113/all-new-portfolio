@@ -39,7 +39,6 @@ theme.PALLETE = {
     gray300: "#A0A0A0",
   },
   kakao: "#FAE100",
-  naver: "#03C75A", 
 };
 
 /*font-size*/

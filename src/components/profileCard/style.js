@@ -10,8 +10,7 @@ S.ProfileCardWrapper = styled.div`
   ${flexColumnCenter};
   ${spacingProps}
   width: 100%;
-  height: auto;
-  background-color: #FFFFFF;
+    background-color: #FFFFFF;
   box-shadow: 4px 4px 14px 0 rgba(0, 0, 0, 0.25);
   border-radius: 34px;
   max-width: 500px;
@@ -150,9 +149,8 @@ S.ProfileInfoListItemValue = styled.div`
 
 S.ProfileInfoStatistics = styled.div`
   display: flex;
+  justify-content: center;
   width: 100%;
-  align-items: flex-end;
-  justify-content: space-between;
   margin-top: 30px;
   padding: 16px 32px;
   border-radius: 16px;

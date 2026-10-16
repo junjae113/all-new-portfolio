@@ -59,7 +59,7 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
     const getChattingRoom = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/chatting/api/get-chattingRoom/${user_id}`
+          `${process.env.REACT_APP_BACKEND_URL}/chatting/api/get-chattingRoom/${user_id}`
         );
         
         if (!response.ok) {
@@ -129,7 +129,7 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
     const onlyDate = selectedDate ? format(selectedDate, "yyyy-MM-dd") : "";
 
 
-    await fetch(`http://localhost:8000/calendar/api/post-schedules`, {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/calendar/api/post-schedules`, {
       method : "POST",
       headers : {
         "Content-Type" : "application/json"
@@ -172,7 +172,7 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
   // 수정 저장
   const handleUpdate = async () => {
     try {
-      const res = await fetch('http://localhost:8000/calendar/api/put-schedules', {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/calendar/api/put-schedules`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -206,7 +206,7 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
   // 삭제버튼 - api 일정 삭제
   const handleDelete = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/calendar/api/delete-schedules`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/calendar/api/delete-schedules`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -228,7 +228,7 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
 
 
   // 삭제버튼 - api 일정 삭제
-  const handleDelete = async () => {
+  // const handleDelete = async () => {
     //  if (!window.confirm("정말 삭제하시겠어요?")) return;
     // try {
     //   const res = await deleteSchedule({ user_id: user_Id, schedule_id: scheduleId });
@@ -239,7 +239,7 @@ const Schedule = ({ selectedSchedule, selectedDate, onDeleted }) => {
     //   console.error(e);
     //   alert("삭제 실패");
     // }
-  }
+  // }
 
   return (
     <S.ScheduleCard>

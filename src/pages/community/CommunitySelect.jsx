@@ -32,10 +32,10 @@ const CommunitySelect = ({activeFilter,onChange}) => {
             $active={activeFilter === "내가 쓴 게시글"}
             onClick={() => handleFilterClick("내가 쓴 게시글")}
           >내가 쓴 게시글</S.FilterMy>
-          <S.FilterFriend
+          {/* <S.FilterFriend
             $active={activeFilter === "내 친구가 쓴 게시글"}
             onClick={() => handleFilterClick("내 친구가 쓴 게시글")}
-          >내 친구가 쓴 게시글</S.FilterFriend>
+          >내 친구가 쓴 게시글</S.FilterFriend> */}
         </S.Filter>
     </>
   );

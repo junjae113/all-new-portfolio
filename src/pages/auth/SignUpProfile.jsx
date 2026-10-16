@@ -100,8 +100,7 @@ const SignUpProfile = () => {
           name: payload.name,
           provider: payload.provider || 'google',
           type: payload.provider === 'google' ? 'google' : 
-                payload.provider === 'kakao' ? 'kakao' : 
-                payload.provider === 'naver' ? 'naver' : 'social',
+                payload.provider === 'kakao' ? 'kakao' : 'social',
           user_id: userId || payload.user_id || searchParams.get('user_id') // JWT에서 추출한 user_id 우선 사용
         };
         

@@ -28,14 +28,23 @@ const CommunityInputContainer = ({activeFilter}) => {
       if(!res.ok) throw new Error('댓글 불러오기 실패');
       const json = await res.json();
 
-      const mappedReplies = (json?.data || []).map(r => ({
-        id:r.reply_id,
+      const toItem = (r) => ({
+        id: r.reply_id,
         text: r.reply_content,
         createdAt: r.created_at,
-        replies: [],
+        authorId: r.user_id,
         authorName: r.authorName,
         authorProfileImage: r.authorProfileImage || '/assets/img/sample-profile.png'
-      }));
+      });
+
+      const all = json?.data || [];
+      // 일반 댓글(parent_reply_id 없음) 아래에 대댓글을 묶어서 화면 구조에 맞춤
+      const mappedReplies = all
+        .filter(r => !r.parent_reply_id)
+        .map(r => ({
+          ...toItem(r),
+          replies: all.filter(c => c.parent_reply_id === r.reply_id).map(toItem),
+        }));
 
       setPost(prev => prev.map(p =>
         p.id === postId ? {...p, commentList: mappedReplies} : p
@@ -96,33 +105,60 @@ const CommunityInputContainer = ({activeFilter}) => {
     }))
   }
 
-  const addReply = (postId, commentId, replyText) => {
-    if(replyText.trim() === "") return;
+  const addReply = async (postId, commentId, replyText) => {
+    const text = (replyText || '').trim();
+    if (text === "") return;
 
-    const replyObject = {
-      id : Date.now(),
-      text : replyText,
-      createdAt : new Date().toISOString()
+    try {
+      const token = localStorage.getItem('jwt_token');
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/community/api/register-reply`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ post_id: postId, reply_content: text, parent_reply_id: commentId }),
+      });
+      if (!res.ok) throw new Error(`대댓글 등록 실패: ${res.status}`);
+      const { reply } = await res.json();
+
+      const replyObject = {
+        id: reply.reply_id,
+        text: reply.reply_content,
+        createdAt: reply.created_at,
+        authorId: reply.user_id,
+        authorName: reply.authorName,
+        authorProfileImage: reply.authorProfileImage || '/assets/img/sample-profile.png',
+      };
+
+      setPost(prev => prev.map(post => {
+        if (post.id !== postId) return post;
+        return {
+          ...post,
+          commentList: post.commentList.map(comment =>
+            comment.id === commentId
+              ? { ...comment, replies: [...(comment.replies || []), replyObject] }
+              : comment
+          ),
+        };
+      }));
+    } catch (e) {
+      console.error(e);
+      alert('대댓글 등록 중 오류가 발생했어요');
     }
-
-    setPost(prev => prev.map(post => {
-      if(post.id !== postId) return post;
-      return{
-        ...post,
-        commentList : post.commentList.map(comment => {
-          if (comment.id === commentId){
-            return {
-              ...comment,
-              replies: [...(comment.replies || []), replyObject]
-            }
-          }
-          return comment;
-        })
-      }
-    }))
   }
   
-  const deleteReply = (postId, commentId, replyId) => {
+  const deleteReply = async (postId, commentId, replyId) => {
+    try {
+      const token = localStorage.getItem('jwt_token');
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/community/api/remove-reply/${replyId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error(`대댓글 삭제 실패: ${res.status}`);
+    } catch (e) {
+      console.error(e);
+      alert('대댓글 삭제 중 오류가 발생했어요');
+      return;
+    }
+
     setPost(prev => prev.map(post => {
       if (post.id !== postId) return post;
       return {
@@ -197,6 +233,7 @@ const CommunityInputContainer = ({activeFilter}) => {
           content: p.content,
           createdAt: p.created_at,
           likeCount: p.like_count ?? 0,
+          commentCount: p.comment_count ?? 0,
           liked: false,
           commentList: [],
           authorName: p.authorName,

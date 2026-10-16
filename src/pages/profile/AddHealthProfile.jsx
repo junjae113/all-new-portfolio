@@ -457,8 +457,9 @@ const AddHealthProfile = () => {
                     ad_yn: tempUserData.ad_yn,
                     pri_yn: tempUserData.pri_yn,
                     type: tempUserData.type || 'k', // 소셜 로그인 타입
-                    // 소셜 로그인 사용자는 password가 없으므로 제외
-                    ...(tempUserData.password && { password: tempUserData.password }),
+                    // 일반 회원가입: 평문 비밀번호 대신 1단계에서 받은 가입 토큰을 전달
+                    // (소셜 로그인 사용자는 토큰이 없으므로 제외)
+                    ...(tempUserData.signupToken && { signupToken: tempUserData.signupToken }),
                     // 강아지 프로필 (이미지 경로만)
                     dogProfile: {
                         name: tempUserData.dogProfile?.name,
@@ -525,7 +526,8 @@ const AddHealthProfile = () => {
                     user_id: tempUserData.user_id,
                     name: tempUserData.name,
                     email: tempUserData.email,
-                    profileImage: tempUserData.dogProfile?.profileImage || null
+                    profileImage: tempUserData.dogProfile?.profileImage || null,
+                    dogProfile: tempUserData.dogProfile || {}
                 }));
                 dispatch(setUserStatus(true));
                 
@@ -543,6 +545,12 @@ const AddHealthProfile = () => {
                 
                 // user_id도 localStorage에 저장 (새로고침 시 로그인 상태 유지용)
                 localStorage.setItem('user_id', tempUserData.user_id);
+
+                // 소셜 회원가입: 소셜 로그인 때 받은 토큰을 로그인 토큰으로 저장
+                // (없으면 가입 직후 글쓰기 등 로그인이 필요한 기능에서 401이 남)
+                if (tempUserData.accessToken) {
+                    localStorage.setItem('jwt_token', tempUserData.accessToken);
+                }
                 console.log('user_id localStorage에 저장됨:', tempUserData.user_id);
                 
                 // 회원가입 완료! localStorage 정리 (프로필 이미지는 유지)
@@ -688,6 +696,12 @@ const AddHealthProfile = () => {
                 
                 // user_id도 localStorage에 저장 (새로고침 시 로그인 상태 유지용)
                 localStorage.setItem('user_id', tempUserData.user_id);
+
+                // 소셜 회원가입: 소셜 로그인 때 받은 토큰을 로그인 토큰으로 저장
+                // (없으면 가입 직후 글쓰기 등 로그인이 필요한 기능에서 401이 남)
+                if (tempUserData.accessToken) {
+                    localStorage.setItem('jwt_token', tempUserData.accessToken);
+                }
                 console.log('user_id localStorage에 저장됨:', tempUserData.user_id);
                 
                 // 회원가입 완료! localStorage 정리 (프로필 이미지는 유지)

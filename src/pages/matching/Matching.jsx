@@ -12,6 +12,7 @@ const Matching = () => {
   
   // Redux에서 현재 사용자 정보 가져오기
   const currentUser = useSelector(state => state.user.currentUser);
+  const currentDog = currentUser.dogProfile.name;
 
   // 탭 데이터
   const tabs = [
@@ -127,7 +128,7 @@ const Matching = () => {
 
         <S.MatchingTitle> 
           <img src="/assets/icons/logo-v2.svg" alt="logo" />
-          <S.MatchingTitleTextSub>'<span>방울이</span>'의</S.MatchingTitleTextSub>
+          <S.MatchingTitleTextSub>'<span>{currentDog}</span>'의</S.MatchingTitleTextSub>
           <S.MatchingTitleTextMain>Mung Pick!</S.MatchingTitleTextMain>
         </S.MatchingTitle>
 

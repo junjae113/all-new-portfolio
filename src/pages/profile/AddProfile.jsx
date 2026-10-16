@@ -22,6 +22,18 @@ const AddProfile = ({ onProfileComplete }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
+    useEffect(() => {
+        if (!location.hash) return;
+        const id = location.hash.slice(1);   // "#dbti" → "dbti"
+
+        // ScrollToTop과 데이터 로딩이 끝난 뒤에 실행되도록 조금 늦춤
+        const timer = setTimeout(() => {
+          document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
+
+        return () => clearTimeout(timer);
+    }, [location.hash]);
+
     // Redux에서 사용자 정보 가져오기
     const currentUser = useSelector(state => state.user.currentUser);
     
@@ -459,7 +471,9 @@ const AddProfile = ({ onProfileComplete }) => {
         // 기본값 설정 및 타이틀로 변환
         const profileData = {
             ...data,
-            charactor: getCharactorTitle(data.charactor || selectedCharactor),
+            // 화면에서 선택된 라디오(selectedCharactor) 기준으로 변환
+            // (편집 모드에서는 data.charactor에 이미 문구가 들어 있어 변환이 실패했었음)
+            charactor: getCharactorTitle(selectedCharactor),
             favorites: (selectedFavorite || [1]).map(getFavoriteTitle).filter(Boolean),
             cautions: (selectedCautions || [1]).map(getCautionTitle).filter(Boolean),
             gender: data.gender || 'male',
@@ -793,7 +807,7 @@ const AddProfile = ({ onProfileComplete }) => {
                         })}
                         style={{marginTop:"20px"}}
                     />
-                    <div style={{textAlign: "right", fontSize: "12px", color: "#666", marginTop: "5px"}}>
+                    <div style={{textAlign: "right", fontSize: "12px", color: "#666", marginTop: "5px"}} id='dbti'>
                         {watch("messageToFriend")?.length || 0}/15
                     </div>
                     <ErrorMessage

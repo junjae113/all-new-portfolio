@@ -144,7 +144,7 @@ const ProfileCard = ({ userData, currentUserId, isMyProfile = false, ...props })
     }
 
     try {
-      const response = await fetch('http://localhost:8000/likes/toggle', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/likes/toggle`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -188,13 +188,13 @@ const ProfileCard = ({ userData, currentUserId, isMyProfile = false, ...props })
             {/* 이름부분 */}
             <S.ProfileInfoHeader>
                 <Text.H6>{dog.name}</Text.H6>
-                <S.HeartIcon onClick={handleHeartClick}>
+                {/* <S.HeartIcon onClick={handleHeartClick}>
                     {isHeartFilled ? (
                         <img src="/assets/icons/heart-filled.svg" width={30} height={30} alt="채워진 하트" />
                     ) : (
                         <img src="/assets/icons/heart.svg" width={30} height={30} alt="하트" />
                     )}
-                </S.HeartIcon>
+                </S.HeartIcon> */}
             </S.ProfileInfoHeader>
             {/* 기본정보 부분 */}
             <S.ProfileInfoItem>
@@ -259,10 +259,10 @@ const ProfileCard = ({ userData, currentUserId, isMyProfile = false, ...props })
         </S.ProfileInfo>
 
         <S.ProfileInfoStatistics>
-            <S.ProfileInfoStatisticsItem>
+            {/* <S.ProfileInfoStatisticsItem>
                 <Text.H6 color={"#FFBA2C"} fontWeight={600}>{dog.friendsCount || 0}</Text.H6>
                 <Text.Caption1>매칭 성공</Text.Caption1>
-            </S.ProfileInfoStatisticsItem>
+            </S.ProfileInfoStatisticsItem> */}
 
             <S.ProfileInfoStatisticsItem>
                 {isMyProfile ? (
@@ -278,10 +278,10 @@ const ProfileCard = ({ userData, currentUserId, isMyProfile = false, ...props })
                 )}
             </S.ProfileInfoStatisticsItem>
 
-            <S.ProfileInfoStatisticsItem>
+            {/* <S.ProfileInfoStatisticsItem>
                 <Text.H6 color={"#FFBA2C"} fontWeight={600}>{likeCount}</Text.H6>
                 <Text.Caption1>좋아요 수</Text.Caption1>
-            </S.ProfileInfoStatisticsItem>
+            </S.ProfileInfoStatisticsItem> */}
         </S.ProfileInfoStatistics>
 
          {!isMyProfile ? (

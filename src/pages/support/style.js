@@ -62,6 +62,11 @@ S.FAQTitle = styled.div`
   padding : 80px 0;
   `
 
+S.AccordionWrapperWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
 
 S.AccordionWrapper = styled.div`
   width: 1440px;

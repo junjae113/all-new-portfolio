@@ -25,7 +25,7 @@ const CalendarDay = ({ scheduleInfo, scheduleDate, onBack, initialDate, refreshK
     const getSchedules = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/calendar/api/get-schedules/${user_id}?date=${selectedDate}`
+          `${process.env.REACT_APP_BACKEND_URL}/calendar/api/get-schedules/${user_id}?date=${selectedDate}`
         );
 
         if(!response.ok) {

@@ -227,26 +227,13 @@ S.SocialLoginTabWrapper = styled.div`
     color
       ? color === "kakao"
         ? theme.PALLETE.kakao
-        : color === "naver"
-        ? theme.PALLETE.naver
         : color
       : "#fff"};
 `;
 
 S.TabText = styled(Text.Body3)`
-  color: ${({ color, theme }) => (color === "naver" ? "#fff" : color === "kakao" ? "#111" : theme.PALLETE.text.main)};
+  color: ${({ color, theme }) => (color === "kakao" ? "#111" : theme.PALLETE.text.main)};
   font-weight: 600;
-`;
-
-S.NaverIcon = styled.div`
-  width: 30px; 
-  height: 30px;
-
-  img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
 `;
 
 S.KakaoIcon = styled.div`

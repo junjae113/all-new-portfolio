@@ -14,7 +14,7 @@ const CompletedSchedule = ({ refreshKey = 0, onOpenDay }) => {
       const getComingSchedules = async () => {
         try {
           const res = await fetch(
-            `http://localhost:8000/calendar/api/completed-schedules/${user_id}`
+            `${process.env.REACT_APP_BACKEND_URL}/calendar/api/completed-schedules/${user_id}`
           );
   
           if (!res.ok) throw new Error(`서버 응답 에러: ${res.status}`);

@@ -24,7 +24,7 @@ const CalendarMonth = ({ onDateClick, onEventClick, refreshKey = 0, initialDate 
     const getSchedulesNames = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/calendar/api/month-schedules/${user_id}`
+          `${process.env.REACT_APP_BACKEND_URL}/calendar/api/month-schedules/${user_id}`
         );
 
         if (!response.ok) {
@@ -51,7 +51,7 @@ const CalendarMonth = ({ onDateClick, onEventClick, refreshKey = 0, initialDate 
     const getBirthdays = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/calendar/api/birthdays/${user_id}`
+          `${process.env.REACT_APP_BACKEND_URL}/calendar/api/birthdays/${user_id}`
         );
 
         if (!response.ok) {

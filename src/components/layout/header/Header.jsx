@@ -84,9 +84,9 @@ const Header = ({ isLoggedIn, user }) => {
       <S.Menu>
         {isLoggedIn ? (
           <>
-            <S.MenuLink to="/friends">
+            {/* <S.MenuLink to="/friends">
               <Text.Body3>친구들 보러가기</Text.Body3>
-            </S.MenuLink>
+            </S.MenuLink> */}
             <S.MenuLink to="/support/faq">
               <Text.Body3>FAQ • 1:1 문의</Text.Body3>
             </S.MenuLink>
@@ -96,17 +96,23 @@ const Header = ({ isLoggedIn, user }) => {
             <S.MenuLink to="/calendar">
               <Text.Body3>멍캘린더</Text.Body3>
             </S.MenuLink>
-            <S.MenuLink to="/chatting">
-              <Text.Body3>멍챗</Text.Body3>
+            <S.MenuLink to="/explore">
+              <Text.Body3>둘러보기</Text.Body3>
             </S.MenuLink>
+            {/* <S.MenuLink to="/chatting">
+              <Text.Body3>멍챗</Text.Body3>
+            </S.MenuLink> */}
           </>
         ) : (
           <>
-            <S.MenuLink to="/friends" onClick={handleFriendsClick}>
+            {/* <S.MenuLink to="/friends" onClick={handleFriendsClick}>
               <Text.Body3>친구들 보러가기</Text.Body3>
-            </S.MenuLink>
+              </S.MenuLink> */}
             <S.MenuLink to="/support/faq">
               <Text.Body3>FAQ • 1:1 문의</Text.Body3>
+            </S.MenuLink>
+            <S.MenuLink to="/explore">
+              <Text.Body3>둘러보기</Text.Body3>
             </S.MenuLink>
           
           </>

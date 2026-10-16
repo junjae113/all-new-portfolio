@@ -10,13 +10,12 @@ const S = {}
   height: 100%;
   min-width: 800px;
   background-color: #fff5ec;
+  padding-bottom: 200px;
  `
 
  S.FirstWrapper = styled.div`
   ${flexRow}
-  /* width: 1440px;
-  height: 570px; */
-  margin-top: 103px;
+  margin-top: 80px;
   gap: 75px;
  `
 
@@ -39,8 +38,9 @@ const S = {}
  S.Friends = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 885px;
-  /* height: 570px; */
+  height: 688px;
   border-radius: 24px;
   box-shadow: 9px 9px 24px rgba(0, 0, 0, 0.2);
   padding: 0 30px;

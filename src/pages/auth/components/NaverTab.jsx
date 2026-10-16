@@ -3,7 +3,7 @@ import S from "../style";
 
 const NaverTab = () => {
   return (
-    <a href='http://localhost:8000/auth/naver' style={{ textDecoration: 'none' , width: '100%'}}>
+    <a href={`${process.env.REACT_APP_BACKEND_URL}/auth/naver`} style={{ textDecoration: 'none' , width: '100%'}}>
       <S.SocialLoginTabWrapper color="naver">
         <S.NaverIcon>
           <img src="/assets/img/naver-L.png" alt="naver"/>
