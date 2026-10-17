@@ -1,3 +1,4 @@
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
 import SignIn from "../pages/auth/SignIn";
 import SignUpLayout from "../pages/auth/SignUpLayout";
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
+      { index: true, element: <Navigate to="/main" replace /> },
       { path: "main", element: <Main /> },
       { path: "explore", element: <Explore /> },
       { path: "sign-in", element: <SignIn /> },
