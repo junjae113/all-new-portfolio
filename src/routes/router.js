@@ -1,5 +1,4 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { createBrowserRouter } from "react-router-dom";
 import SignIn from "../pages/auth/SignIn";
 import SignUpLayout from "../pages/auth/SignUpLayout";
 import SignUpAgree from "../pages/auth/SignUpAgree";
