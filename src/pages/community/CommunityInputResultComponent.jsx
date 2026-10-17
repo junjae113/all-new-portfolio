@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { resolveImageUrl } from "../../utils/imageUrl";
 import S from './style';
 import PopupCardLarge from '../../components/popUp/PopupCardLarge';
 import { useSelector } from 'react-redux';
@@ -29,7 +30,7 @@ const CommunityInputResultComponent = ({
   const currentUser = useSelector(state => state.user.currentUser);
   const myDogName = currentUser?.dogProfile?.name ;
   const myId = currentUser?.user_id; // 내가 쓴 글/댓글에만 삭제 버튼을 보여주기 위해 사용
-  const myDogImg = currentUser?.dogProfile?.profileImage || '/assets/img/my-profile.png';
+  const myDogImg = resolveImageUrl(currentUser?.dogProfile?.profileImage, '/assets/img/my-profile.png');
 
   // 시간 표시
   const getTime = (time) => {
@@ -345,7 +346,7 @@ const CommunityInputResultComponent = ({
                 <S.CommentList>
                   {postItem.commentList.map((comment, i) => {
                     const cAuthorImg =
-                      comment.authorProfileImage || '/assets/img/sample-profile.png';
+                      resolveImageUrl(comment.authorProfileImage, '/assets/img/sample-profile.png');
                     const cAuthorName = comment.authorName ;
 
                     return (
@@ -380,7 +381,7 @@ const CommunityInputResultComponent = ({
                         {/* 대댓글 출력 */}
                         {comment.replies?.map((reply) => {
                           const rAuthorImg =
-                            reply.authorProfileImage || '/assets/img/sample-profile.png';
+                            resolveImageUrl(reply.authorProfileImage, '/assets/img/sample-profile.png');
                           const rAuthorName = reply.authorName ;
 
                           return (

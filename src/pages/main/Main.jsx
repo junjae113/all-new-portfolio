@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { resolveImageUrl } from "../../utils/imageUrl";
 import BasicButton from "../../components/button/BasicButton";
 import Text from "../../components/text/size";
 import BasicInput from "../../components/input/BasicInput";
@@ -35,7 +36,7 @@ const Main = () => {
     .then((data) => {
       const profileImage = data.user?.dogProfile?.profileImage
       if(profileImage){
-        setProfileImage(profileImage)
+        setProfileImage(resolveImageUrl(profileImage))
       } else {
         setProfileImage("/assets/img/my-profile.png")
       }

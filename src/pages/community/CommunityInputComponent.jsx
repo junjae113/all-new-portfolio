@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { resolveImageUrl } from "../../utils/imageUrl";
 import { useSelector } from 'react-redux';
 import PopupCardLarge from '../../components/popUp/PopupCardLarge';
 import CommunityTextAreaComponent from './CommunityTextAreaComponent';
@@ -14,7 +15,7 @@ const CommunityInputComponent = ({post, setPost}) => {
   const [showConfirm, setShowConfirm] = useState(false)
 
   const currentUser = useSelector(state => state.user.currentUser);
-  const profileSrc = currentUser?.dogProfile?.profileImage || '/assets/img/my-profile.png';
+  const profileSrc = resolveImageUrl(currentUser?.dogProfile?.profileImage, '/assets/img/my-profile.png');
 
 
   const handleConfirm = async () => {

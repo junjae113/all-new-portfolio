@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { resolveImageUrl } from "../../utils/imageUrl";
 import { useNavigate } from 'react-router-dom';
 
 import BasicButton from '../button/BasicButton';
@@ -182,7 +183,7 @@ const ProfileCard = ({ userData, currentUserId, isMyProfile = false, ...props })
           </S.TooltipContainer>
         )}
         <S.ProfileImage>
-            <img src={dog.profileImage} alt={dog.name}/>
+            <img src={resolveImageUrl(dog.profileImage)} alt={dog.name}/>
         </S.ProfileImage>
         <S.ProfileInfo>
             {/* 이름부분 */}

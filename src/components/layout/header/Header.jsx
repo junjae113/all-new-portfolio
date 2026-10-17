@@ -1,4 +1,5 @@
 import React from "react";
+import { resolveImageUrl } from "../../../utils/imageUrl";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../../modules/user";
@@ -131,7 +132,7 @@ const Header = ({ isLoggedIn, user }) => {
             <S.ProfileSection>
               <Link to="/my-page">
               <S.ProfileImg
-                src={getProfileImageSrc()}
+                src={resolveImageUrl(getProfileImageSrc())}
                 alt="프로필"
                 onError={(e) => {
                   e.target.src = "/assets/img/sample-profile.png";

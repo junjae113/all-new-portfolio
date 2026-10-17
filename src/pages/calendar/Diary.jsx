@@ -1,4 +1,5 @@
 import { faImage, faTimesCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { resolveImageUrl } from "../../utils/imageUrl";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -269,7 +270,7 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
       {hasDiary && !isEditing ? (
         diaryPhoto && (
           <S.ImageWrapper>
-            <S.SavedImage src={diaryPhoto} alt="saved" />
+            <S.SavedImage src={resolveImageUrl(diaryPhoto)} alt="saved" />
           </S.ImageWrapper>
         )
       ) : isEditing ? (
@@ -286,7 +287,7 @@ const Diary = ({ selectedSchedule, selectedDate, onDeleted }) => {
             // 새 미리보기가 없고 기존 이미지가 있으면 보여주고 제거 버튼 제공
             diaryPhoto && !removePhoto && (
               <S.ImageWrapper>
-                <S.SavedImage src={diaryPhoto} alt="saved" />
+                <S.SavedImage src={resolveImageUrl(diaryPhoto)} alt="saved" />
                 <S.DeleteImageButton onClick={handleRemoveSavedPhoto} title="이미지 제거">
                   <FontAwesomeIcon icon={faTrash} style={{ color: 'white', fontSize: '20px' }} />
                 </S.DeleteImageButton>

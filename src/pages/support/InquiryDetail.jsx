@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { resolveImageUrl } from "../../utils/imageUrl";
 import SupportMenuComponent from './SupportMenuComponent';
 import S from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -65,7 +66,7 @@ const InquiryDetail = ({isUpdate, setIsUpdate}) => {
         .then((data) => {
             const profileImage = data.user?.dogProfile?.profileImage
             if(profileImage != null){   
-                setProfile(profileImage)
+                setProfile(resolveImageUrl(profileImage))
             } else {
                 setProfile("/assets/img/sample-profile.png")
             }

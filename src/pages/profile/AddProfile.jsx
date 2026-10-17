@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { resolveImageUrl } from "../../utils/imageUrl";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import BasicButton from '../../components/button/BasicButton';
@@ -729,7 +730,7 @@ const AddProfile = ({ onProfileComplete }) => {
                     </S.CaptionTitlewrap>
                     <S.ProfileWrap onClick={() => fileInputRef.current.click()}>
                         <S.Profile 
-                            src={imageSrc || "/assets/img/progile/camera.svg"} 
+                            src={resolveImageUrl(imageSrc) || "/assets/img/progile/camera.svg"} 
                         />
                     </S.ProfileWrap>
                     <BasicButton
